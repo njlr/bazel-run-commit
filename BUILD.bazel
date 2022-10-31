@@ -1,0 +1,44 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit_layer")
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+
+container_run_and_commit_layer(
+  name = "install_git",
+  image = "@dotnet_runtime_deps_6_0_10//image",
+  commands = [
+    "; ".join([
+      "apt-get update -y",
+      "apt-get install -y git=1:2.30.2-1",
+      "apt-get clean",
+      "rm -rf /var/lib/apt/lists/*",
+      "rm -rf /var/cache/ldconfig/aux-cache",
+      "rm -rf /var/log/alternatives.log",
+      "rm -rf /var/log/apt/term.log",
+      "rm -rf /var/log/apt/history.log",
+      "rm -rf /var/log/dpkg.log",
+      "git --version",
+    ]),
+  ],
+)
+
+container_image(
+  name = "image",
+  base = "@dotnet_runtime_deps_6_0_10//image",
+  layers = [
+    # This is not deterministic... why?
+    # https://github.com/bazelbuild/rules_docker/issues/2180
+    # ":install_git",
+  ],
+  tars = [
+    # But this works great!
+    ":install_git",
+  ],
+)
+
+copy_file(
+  name = "image_archive",
+  src = ":image.tar",
+  out = "image_archive.tar",
+  is_executable = False,
+  allow_symlink = False,
+)

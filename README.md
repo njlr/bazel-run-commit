@@ -28,7 +28,7 @@ bazel build //:image_archive
 cp bazel-bin/image_archive.tar b.tar
 ```
 
-Next, compare them with [Container Diff](https://github.com/GoogleContainerTools/container-diff):
+Next, compare them with [`container-diff`](https://github.com/GoogleContainerTools/container-diff):
 
 ```bash
 container-diff-linux-amd64 diff -t file -t size a.tar b.tar

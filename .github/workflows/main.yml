@@ -15,3 +15,8 @@ jobs:
       - name: Main
         run: |
           ./build_and_hash.sh
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: image_archive.tar
+          path: bazel-bin/image_archive.tar

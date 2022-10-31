@@ -31,7 +31,7 @@ cp bazel-bin/image_archive.tar b.tar
 Next, compare them with [`container-diff`](https://github.com/GoogleContainerTools/container-diff):
 
 ```bash
-container-diff-linux-amd64 diff -t file -t size a.tar b.tar
+container-diff diff -t file -t size a.tar b.tar
 ```
 
 Examine the output to find the offending files!

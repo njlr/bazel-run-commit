@@ -7,6 +7,10 @@ Example showing deterministic install of an apt package in a Docker image using 
 First, obtain two versions of the archive:
 
 ```bash
+# Clean
+rm -rf ./bazel-*
+bazel clean
+
 # Build
 bazel build //:image_archive
 
@@ -22,10 +26,6 @@ bazel build //:image_archive
 
 # Save the output
 cp bazel-bin/image_archive.tar b.tar
-
-# Clean
-rm -rf ./bazel-*
-bazel clean
 ```
 
 Next, compare them with [Container Diff](https://github.com/GoogleContainerTools/container-diff):

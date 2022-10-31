@@ -52,7 +52,7 @@ FILE                                 SIZE1        SIZE2
 /var/log/alternatives.log            1.1K         1.1K
 ```
 
-Finally, update the run commands to remove them:
+Finally, update the run `commands` to remove them:
 
 ```diff
 container_run_and_commit_layer(

@@ -58,15 +58,17 @@ Finally, update the run commands to remove them:
 container_run_and_commit_layer(
   name = "install_git",
   commands = [
-    "apt-get update -y",
-    "apt-get install -y git=1:2.30.2-1",
-    "apt-get clean",
-    "rm -rf /var/lib/apt/lists/*",
-+    "rm -rf /var/cache/ldconfig/aux-cache",
-+    "rm -rf /var/log/alternatives.log",
-+    "rm -rf /var/log/apt/term.log",
-+    "rm -rf /var/log/apt/history.log",
-+    "rm -rf /var/log/dpkg.log",
+    " && ".join([
+      "apt-get update -y",
+      "apt-get install -y git=1:2.30.2-1",
+      "apt-get clean",
+      "rm -rf /var/lib/apt/lists/*",
++      "rm -rf /var/cache/ldconfig/aux-cache",
++      "rm -rf /var/log/alternatives.log",
++      "rm -rf /var/log/apt/term.log",
++      "rm -rf /var/log/apt/history.log",
++      "rm -rf /var/log/dpkg.log",
+    )],
   ],
   image = "@dotnet_runtime_deps_6_0_10//image",
 )

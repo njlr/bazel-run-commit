@@ -10,6 +10,7 @@ container_run_and_commit_layer(
       "apt-get update -y",
       "apt-get install -y git=1:2.30.2-1",
       "apt-get clean",
+      "rm -rf /etc/group-",
       "rm -rf /var/lib/apt/lists/*",
       "rm -rf /var/cache/ldconfig/aux-cache",
       "rm -rf /var/log/alternatives.log",
